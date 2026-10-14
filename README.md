@@ -17,7 +17,7 @@ de testeur QA.
 | test_connexion_mauvais_mot_de_passe | Connexion avec mauvais mot de passe | Message d'erreur affiché |
 | test_images_produits_sont_differentes | Détecter le bug des images identiques | XFAIL (bug connu, ticket Jira) |
 | test_connexion_utilisateur_bloqué | Connexion avec un utilisateur bloqué | Message d'erreur affiché |
-
+| test_champs_vides | Connexion avec des champs vides | Message d'erreur affiché |
 ## Installation et lancement
 ```
 python -m venv venv

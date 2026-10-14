@@ -24,20 +24,32 @@ def test_connexion_mauvais_mot_de_passe(page: Page):
 @pytest.mark.xfail(reason="Bug connu - voir ticket Jira : images produits identiques pour problem_user")
 def test_images_produits_sont_differentes(page: Page):
     se_connecter(page, "problem_user", "secret_sauce")
-
     images = page.locator(".inventory_item_img img")
-    expect(images.first).to_be_visible()  # attend que la page produits soit chargée
-
+    expect(images.first).to_be_visible()
     sources = [images.nth(i).get_attribute("src") for i in range(images.count())]
-
     assert len(set(sources)) > 1, f"Toutes les images pointent vers la même source : {sources[0]}"
+
 
 def test_utilisateur_bloque(page: Page):
     se_connecter(page, "locked_out_user", "secret_sauce")
-
     erreur = page.locator("[data-test='error']")
     expect(erreur).to_be_visible()
     expect(erreur).to_contain_text("locked out")
+    expect(page.locator(".title")).to_have_count(0)
 
-    # On n'a pas atteint la page produits
+
+@pytest.mark.parametrize(
+    "identifiant, mot_de_passe, message_attendu",
+    [
+        ("", "", "Username is required"),
+        ("", "secret_sauce", "Username is required"),
+        ("standard_user", "", "Password is required"),
+    ],
+    ids=["tout_vide", "identifiant_vide", "mot_de_passe_vide"],
+)
+def test_connexion_champs_vides(page: Page, identifiant, mot_de_passe, message_attendu):
+    se_connecter(page, identifiant, mot_de_passe)
+    erreur = page.locator("[data-test='error']")
+    expect(erreur).to_be_visible()
+    expect(erreur).to_contain_text(message_attendu)
     expect(page.locator(".title")).to_have_count(0)
