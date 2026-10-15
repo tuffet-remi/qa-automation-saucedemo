@@ -20,8 +20,7 @@ def test_connexion_mauvais_mot_de_passe(page: Page):
     se_connecter(page, "standard_user", "mauvais_mot_de_passe")
     expect(page.locator("[data-test='error']")).to_be_visible()
 
-
-@pytest.mark.xfail(reason="Bug connu - voir ticket Jira : images produits identiques pour problem_user")
+@pytest.mark.xfail(reason="Bug connu - REMI-3 : images produits identiques pour problem_user")
 def test_images_produits_sont_differentes(page: Page):
     se_connecter(page, "problem_user", "secret_sauce")
     images = page.locator(".inventory_item_img img")
