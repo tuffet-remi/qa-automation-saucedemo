@@ -1,7 +1,7 @@
 # Plan de test : SauceDemo
 
 ## 1. Objectif
-M'entraîner à la compréhension globale du métier et aux différents outils et logiciels auxquels j'aurais à faire face.
+Vérifier le comportement de la page de connexion de saucedemo.com (identifiants valides, invalides, champs vides, compte bloqué) et détecter un bug d'affichage connu. Ce projet d'entraînement me permet aussi de pratiquer les outils du métier : automatisation (Playwright, pytest), suivi des anomalies (Jira) et versionnage (GitHub).
 
 ## 2. Périmètre
 **Testé** : connexion (identifiants valides, invalides, champs vides, compte bloqué), affichage des images produits.
@@ -25,11 +25,11 @@ Site saucedemo.com, Python 3.12, Playwright, pytest, Chromium, Jira, GitHub
 ## 6. Cas de test
 | ID | Cas | Résultat attendu | Test automatisé | Ticket Jira | Statut |
 |---|---|---|---|---|---|
-| TC01 | Connexion valide | Page Products affichée | test_connexion_reussie | [ ] | Passé |
-| TC02 | Mauvais mot de passe | Message d'erreur affiché | test_connexion_mauvais_mot_de_passe | [ ] | Passé |
-| TC03 | Utilisateur bloqué | Message « locked out », pas d'accès aux produits | test_utilisateur_bloque | [ ] | Passé |
-| TC04 | Champs vides (3 combinaisons) | Message « Username is required » ou « Password is required » | test_connexion_champs_vides | [ ] | Passé |
-| TC05 | Images produits (problem_user) | Une image différente par produit | test_images_produits_sont_differentes | [ ] | Échec attendu (bug connu) |
+| TC01 | Connexion valide | Page Products affichée | test_connexion_reussie | REMI-1 | Passé |
+| TC02 | Mauvais mot de passe | Message d'erreur affiché | test_connexion_mauvais_mot_de_passe | REMI-2 | Passé |
+| TC03 | Utilisateur bloqué | Message « locked out », pas d'accès aux produits | test_utilisateur_bloque | REMI-4 | Passé |
+| TC04 | Champs vides (3 combinaisons) | Message « Username is required » ou « Password is required » | test_connexion_champs_vides | REMI-5 | Passé |
+| TC05 | Images produits (problem_user) | Une image différente par produit | test_images_produits_sont_differentes | REMI-3 | Échec attendu (bug connu) |
 
 ## 7. Critères d'entrée et de sortie
 **Entrée** : site accessible, environnement installé, comptes de test disponibles.
